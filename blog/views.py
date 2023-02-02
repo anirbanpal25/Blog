@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
-from django.urls import reverse
-from django.views.generic import ListView
+from django.urls import reverse,reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
 from django.views import View
 
 from .models import Post
@@ -20,6 +20,13 @@ class StartingPageView(ListView):
         queryset = super().get_queryset()
         data = queryset[:3]
         return data
+      
+class AddPostView(CreateView):
+	
+  template_name = 'blog/add_post.html'
+  model = Post
+  fields = '__all__'
+
 
 
 class AllPostsView(ListView):

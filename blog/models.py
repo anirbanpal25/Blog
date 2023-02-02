@@ -1,5 +1,7 @@
 from django.db import models
+
 from django.core.validators import MinLengthValidator
+from django.urls import reverse
 
 # Create your models here.
 
@@ -9,18 +11,34 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.caption
+    
+ 
+GENRE = (
+    ("frontend", "frontend"),
+    ("backend", "backend"),
+    ("fullstack", "fullstack")
+)
+  
 
 
 class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email_address = models.EmailField()
+    genre = models.CharField(
+        max_length = 20,
+        choices = GENRE,
+        default = 'fullstack'
+        )
 
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
 
     def __str__(self):
         return self.full_name()
+    
+    
+  
 
 
 class Post(models.Model):
@@ -36,6 +54,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        #return reverse('all-posts', args=(str(self.id)))
+        return reverse('starting-page')
 
 
 class Comment(models.Model):
