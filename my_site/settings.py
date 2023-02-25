@@ -135,4 +135,4 @@ MEDIA_URL="/files/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL= 'starting-page'
-LOGOUT_REDIRECT_URL= 'starting-page'
+LOGOUT_REDIRECT_URL= 'login'
